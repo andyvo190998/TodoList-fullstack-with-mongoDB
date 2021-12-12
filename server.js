@@ -26,7 +26,7 @@ const itemsSchema = {
 const Item = mongoose.model('Item', itemsSchema);
 
 // read route
-app.get('/todos', (req,res) => {
+app.get('/todos/', (req,res) => {
     Item.find()
     .then((items) => res.json(items))
     .catch((err) => res.status(400).json("Error: "+ err))
@@ -44,7 +44,23 @@ app.post('/newtodo', (req, res) => {
     .catch(err => res.status(400).json("Error "+err))
 })
 
+//delete route
+app.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    Item.findByIdAndRemove(id, (req, res) => {
+        console.log('item deleted')
+    })
+})
+
 //update route
+app.put('/update/:id', (req,res) => {
+    const updatedItem = {todo: req.body.todo}
+    console.log(updatedItem)
+    Item.findByIdAndUpdate({_id: req.params.id}, {$set: updatedItem}, (req, res) => {
+        console.log('item updated')
+    })
+    app.send(alert('hello'))
+})
 
 app.listen(port, function () {
     console.log('hello world')

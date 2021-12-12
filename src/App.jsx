@@ -14,6 +14,7 @@ const App = () => {
   const [input, setInput] = useState('');
   const [selectionModel, setSelectionModel] = useState([])
 
+
   const useStyles = makeStyles({
     table: {
       marginLeft: "45vh",
@@ -32,7 +33,8 @@ const App = () => {
   };
 
   const handleOnchangeUpdate = (e) => {
-    setInput(e.target.value);
+    const {name, value} = e.target
+    setInput((previous)=> ({...previous, [name]: value}));
   }
 
   const handleOnclick = (e) => {
@@ -67,18 +69,9 @@ const App = () => {
   //   setTodos(toggleCheckbox);
   // };
 
-  const updateSomething = (e) => {
-    // e.preventDefault();
-    // const update = todos.map((todo1) => {
-    //   if (todo1.id === textUpdate.id) {
-    //     textUpdate.todo = input;
-    //   }
-    //   return todo1;
-    // })
-    // setTodos(update);
-    // setOpenUpdateTodo(false);
-    // setTodo('');
-    // setTextUpdate(null);
+  const updateSomething = (id) => {
+    axios.put("/update/" + id, input)
+    setOpenUpdateTodo(false)
   }
 
   const columns = [
@@ -89,15 +82,18 @@ const App = () => {
       width: 200,
       renderCell: (cellValues) => {
         // console.log("hi", cellValues.row.todo);
+        // console.log(cellValues.row._id)
+        const todoId = cellValues.row._id
         const handleDelete = () => {
-          // const filter = todos.filter((todo) => (todo.id !== cellValues.id));
-          // setTodos(filter);
+          if(window.confirm("Do you want to delete this todo?")) {
+            axios.delete('/delete/' + todoId)
+          }
         };
 
         const handleEdit = () => {
-          // setOpenUpdateTodo(true);
-          // setTextUpdate(cellValues.row)
-          // setInput(cellValues.row.todo);
+          setOpenUpdateTodo(true);
+          setTextUpdate(cellValues.row)
+          setInput(cellValues.row);
         }
         return (
           <>
@@ -155,9 +151,9 @@ const App = () => {
           value={todo}
         />
         <Button size="large" onClick={handleOnclick} variant="contained">Add to do</Button>
-      </form>) : (<form style={{ display: 'flex', justifyContent: 'center', padding: '20px 0px 20px 0px' }} onSubmit={updateSomething}>
-        <TextField type="text" onChange={handleOnchangeUpdate} placeholder="what do you want to do?" name="name" value={input} />
-        <Button onClick={updateSomething} variant="contained">update</Button>
+      </form>) : (<form style={{ display: 'flex', justifyContent: 'center', padding: '20px 0px 20px 0px' }} onSubmit={()=> updateSomething(textUpdate._id)}>
+        <TextField type="text" onChange={handleOnchangeUpdate} placeholder="what do you want to do?" name="todo" value={input.todo} />
+        <Button onClick={()=> updateSomething(textUpdate._id)} variant="contained">update</Button>
       </form>)}
       <br />
         <DataGrid
@@ -167,7 +163,7 @@ const App = () => {
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
-          checkboxSelection
+          // checkboxSelection
           disableSelectionOnClick
           onSelectionModelChange={(newSelectionModel) => {
             setSelectionModel(newSelectionModel);
