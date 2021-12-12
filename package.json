@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
-  "homepage": "https://andyvo190998.github.io/React-Todo-List/",
+  "homepage": "https://andyvo190998.github.io/TodoList-fullstack-with-mongoDB/",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
