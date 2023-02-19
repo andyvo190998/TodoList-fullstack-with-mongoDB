@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import { Typography, AppBar, CssBaseline, Toolbar, TextField } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DataGrid } from '@mui/x-data-grid';
-import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 
 const App = () => {
@@ -15,16 +14,16 @@ const App = () => {
   const [selectionModel, setSelectionModel] = useState([])
 
 
-  const useStyles = makeStyles({
-    table: {
-      marginLeft: "45vh",
-      marginRight: "45vh"
-    },
-    typography: {
-      paddingTop: '10px',
-      textAlign: 'center'
-    }
-  })
+  // const useStyles = makeStyles({
+  //   table: {
+  //     marginLeft: "45vh",
+  //     marginRight: "45vh"
+  //   },
+  //   typography: {
+  //     paddingTop: '10px',
+  //     textAlign: 'center'
+  //   }
+  // })
 
   const rows = todos;
 
@@ -118,7 +117,7 @@ const App = () => {
   ];
 
   useEffect(() => {
-    fetch('/todos')
+    fetch('/todos/')
     .then((res) => {
       return res.json();
     })

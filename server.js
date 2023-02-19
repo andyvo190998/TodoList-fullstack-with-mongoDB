@@ -64,5 +64,5 @@ app.put('/update/:id', (req,res) => {
 })
 
 app.listen(port, function () {
-    console.log('hello world')
+    console.log(`server is running on port ${port}`)
 })
