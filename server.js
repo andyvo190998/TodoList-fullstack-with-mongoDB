@@ -17,7 +17,7 @@ const apiKey = process.env.API_KEY
 
 //connect to mongooseDB
 mongoose.connect("mongodb+srv://andy1:andy123456789@cluster1.jphlzgn.mongodb.net/?retryWrites=true&w=majority")
-    .then(() => console.log("DB connected"))
+    .then(() => console.log("DB connected")).catch((err) => res.status(400).json("Error: "+ err))
 //data schema
 const itemsSchema = {
     todo: String,
