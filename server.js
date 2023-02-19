@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 3001;
+require("dotenv").config();
 
 
 //congifig
@@ -12,10 +13,10 @@ app.use(express.urlencoded({extended: false}));
 require('dotenv').config();
 const apiKey = process.env.API_KEY
 
-console.log(process.env);
+// console.log(apiKey);
 
 //connect to mongooseDB
-mongoose.connect(apiKey);
+mongoose.connect(apiKey).then(() => console.log("DB connected"));
 //data schema
 const itemsSchema = {
     todo: String,
