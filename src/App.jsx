@@ -47,7 +47,7 @@ const App = () => {
         completed: false
       }
       // setTodos((previous) => ([...previous, newTodo]))
-      axios.post('/newtodo', newTodo)
+      axios.post('https://todo-list-backend-4bg9.onrender.com/newtodo', newTodo)
       console.log(newTodo);
       setTodo('');
     }
@@ -69,7 +69,7 @@ const App = () => {
   // };
 
   const updateSomething = (id) => {
-    axios.put("/update/" + id, input)
+    axios.put("https://todo-list-backend-4bg9.onrender.com/update/" + id, input)
     setOpenUpdateTodo(false)
   }
 
@@ -85,7 +85,7 @@ const App = () => {
         const todoId = cellValues.row._id
         const handleDelete = () => {
           if(window.confirm("Do you want to delete this todo?")) {
-            axios.delete('/delete/' + todoId)
+            axios.delete('https://todo-list-backend-4bg9.onrender.com/delete/' + todoId)
           }
         };
 
@@ -117,7 +117,7 @@ const App = () => {
   ];
 
   useEffect(() => {
-    fetch('/todos/')
+    fetch('https://todo-list-backend-4bg9.onrender.com/todos/')
     .then((res) => {
       return res.json();
     })
