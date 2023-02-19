@@ -7,7 +7,9 @@ require("dotenv").config();
 
 
 //congifig
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000", "http://todo-list.onrender.com"]
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 require('dotenv').config();
