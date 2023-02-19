@@ -16,7 +16,8 @@ const apiKey = process.env.API_KEY
 // console.log(apiKey);
 
 //connect to mongooseDB
-mongoose.connect(apiKey).then(() => console.log("DB connected"));
+mongoose.connect("mongodb+srv://andy1:andy123456789@cluster1.jphlzgn.mongodb.net/?retryWrites=true&w=majority")
+    .then(() => console.log("DB connected"))
 //data schema
 const itemsSchema = {
     todo: String,
