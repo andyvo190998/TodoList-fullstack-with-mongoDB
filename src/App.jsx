@@ -13,18 +13,6 @@ const App = () => {
   const [input, setInput] = useState('');
   const [selectionModel, setSelectionModel] = useState([])
 
-
-  // const useStyles = makeStyles({
-  //   table: {
-  //     marginLeft: "45vh",
-  //     marginRight: "45vh"
-  //   },
-  //   typography: {
-  //     paddingTop: '10px',
-  //     textAlign: 'center'
-  //   }
-  // })
-
   const rows = todos;
 
   const handleOnchange = (e) => {
@@ -47,29 +35,14 @@ const App = () => {
         completed: false
       }
       // setTodos((previous) => ([...previous, newTodo]))
-      axios.post('/newtodo', newTodo)
+      axios.post('https://todo-list-backend-4bg9.onrender.com/newtodo', newTodo)
       console.log(newTodo);
       setTodo('');
     }
   };
 
-  // const checkBox = (id) => {
-  //   const toggleCheckbox = todos.map((todo) => {
-  //     if (todo.id === id) {
-  //       todo.completed = !todo.completed
-  //     };
-  //     if (todo.id === id, todo.completed === true) {
-  //       document.getElementById(todo.id).style.textDecoration = 'line-through';
-  //     } else {
-  //       document.getElementById(todo.id).style.textDecoration = 'none';
-  //     };
-  //     return todo;
-  //   });
-  //   setTodos(toggleCheckbox);
-  // };
-
   const updateSomething = (id) => {
-    axios.put("/update/" + id, input)
+    axios.put("https://todo-list-backend-4bg9.onrender.com/update/" + id, input)
     setOpenUpdateTodo(false)
   }
 
@@ -85,7 +58,7 @@ const App = () => {
         const todoId = cellValues.row._id
         const handleDelete = () => {
           if(window.confirm("Do you want to delete this todo?")) {
-            axios.delete('/delete/' + todoId)
+            axios.delete('https://todo-list-backend-4bg9.onrender.com/delete/' + todoId)
           }
         };
 
@@ -117,9 +90,9 @@ const App = () => {
   ];
 
   useEffect(() => {
-    fetch('/')
+    fetch('https://todo-list-backend-4bg9.onrender.com/')
     .then((res) => {
-      return res.json();
+      return res.json()
     })
     .then ((jsonRes) => setTodos(jsonRes))
     .catch((err) => console.log(err))
@@ -127,7 +100,6 @@ const App = () => {
    },[todos]);
 
 
-  // const classes = useStyles();
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -156,7 +128,7 @@ const App = () => {
       </form>)}
       <br />
         <DataGrid
-          style={{marginLeft: "45vh", marginRight: "45vh"}}
+          style={{marginLeft: "20px", marginRight: "20px"}}
           rows={rows}
           getRowId={(row) => row._id}
           columns={columns}
