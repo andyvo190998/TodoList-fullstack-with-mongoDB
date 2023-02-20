@@ -28,7 +28,7 @@ const itemsSchema = {
 const Item = mongoose.model('Item', itemsSchema);
 
 // read route
-app.get('/todos/', (req,res) => {
+app.get('/', (req,res) => {
     Item.find()
     .then((items) => res.json(items))
     .catch((err) => res.status(400).json("Error: "+ err))

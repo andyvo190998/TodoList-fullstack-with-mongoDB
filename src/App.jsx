@@ -117,7 +117,7 @@ const App = () => {
   ];
 
   useEffect(() => {
-    fetch('/todos/')
+    fetch('/')
     .then((res) => {
       return res.json();
     })
