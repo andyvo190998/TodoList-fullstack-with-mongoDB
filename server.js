@@ -28,13 +28,13 @@ const itemsSchema = {
 const Item = mongoose.model('Item', itemsSchema);
 
 // read route
-app.get('https://todo-list-backend-4bg9.onrender.com/todos/', (req,res) => {
+app.get('/todos/', (req,res) => {
     Item.find()
     .then((items) => res.json(items))
     .catch((err) => res.status(400).json("Error: "+ err))
 });
 //create route
-app.post('https://todo-list-backend-4bg9.onrender.com/newtodo', (req, res) => {
+app.post('/newtodo', (req, res) => {
     const newItem = new Item(
         {
             todo: req.body.todo,
@@ -47,7 +47,7 @@ app.post('https://todo-list-backend-4bg9.onrender.com/newtodo', (req, res) => {
 })
 
 //delete route
-app.delete('https://todo-list-backend-4bg9.onrender.com/delete/:id', (req, res) => {
+app.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     Item.findByIdAndRemove(id, (req, res) => {
         console.log('item deleted')
@@ -55,7 +55,7 @@ app.delete('https://todo-list-backend-4bg9.onrender.com/delete/:id', (req, res) 
 })
 
 //update route
-app.put('https://todo-list-backend-4bg9.onrender.com/update/:id', (req,res) => {
+app.put('/update/:id', (req,res) => {
     const updatedItem = {todo: req.body.todo}
     console.log(updatedItem)
     Item.findByIdAndUpdate({_id: req.params.id}, {$set: updatedItem}, (req, res) => {
